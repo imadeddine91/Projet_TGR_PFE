@@ -1,0 +1,61 @@
+﻿@model ProjerTGR_PFE_2016_Fin.Models.Categorie
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title"> <i class="fa fa-trash-o" aria-hidden="true"></i> Delete </h4>
+</div>
+
+<div class="modal-body">
+    
+    @using (Html.BeginForm("Delete","Categorie",FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        
+        
+
+    <fieldset>
+        <legend>Voulez vous vraiment supprimer cet catégorie !!!</legend>
+
+
+        <table>
+            <tr>
+                <td class="display-label" id="td_label">@Html.DisplayNameFor(model => model.Num_catg) :</td>
+                <td class="display-field" id="td_out">@Html.DisplayFor(model => model.Num_catg)</td>
+            </tr>
+            <tr>
+                <td class="display-label" id="td_label">@Html.DisplayNameFor(model => model.Nom_catg) :</td>
+                <td class="display-field" id="td_out">@Html.DisplayFor(model => model.Nom_catg)</td>
+            </tr>
+        </table>
+
+    </fieldset>
+
+
+        <div class="modal-footer">
+           
+
+               
+                <p>
+                    <input type="submit" class="btn btn-primary" value="Delete" /> 
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                   
+                
+                </p>
+
+          
+          
+        </div>
+    }
+</div>
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

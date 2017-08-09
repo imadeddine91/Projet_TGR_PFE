@@ -1,0 +1,43 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout_login.cshtml";
+}
+@model ProjerTGR_PFE_2016_Fin.Models.Users
+
+
+<img width="150px"  id="imgLOgo" src="~/Images/onlinelogomaker-063016-1648.png" />
+
+@using (Html.BeginForm("login", "Home", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <section id="loginForm">
+
+
+        <fieldset>
+         
+            <ol>
+                <li style="margin:30px;">
+                    @Html.LabelFor(m => m.Username)
+                    @Html.TextBoxFor(m => m.Username)
+                   <div>@Html.ValidationMessageFor(m => m.Username)</div> 
+                </li>
+                <li style="margin:30px;">
+                    @Html.LabelFor(m => m.password)
+                    @Html.PasswordFor(m => m.password)
+                   <div>@Html.ValidationMessageFor(m => m.password)</div> 
+                </li>
+
+            </ol>
+            <button type="submit" style="margin-left: 89px; width: 17.8% " class=" btn"> Se connecter </button>
+         
+           
+        </fieldset>
+
+    </section>
+
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

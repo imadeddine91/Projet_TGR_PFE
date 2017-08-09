@@ -1,0 +1,67 @@
+﻿@model ProjerTGR_PFE_2016_Fin.Models.Union_ref_bo
+
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title"> <i class="fa fa-trash-o" aria-hidden="true"></i> Delete </h4>
+</div>
+
+
+<div class="modal-body">
+
+    @using (Html.BeginForm("Delete", "list", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        <fieldset>
+            <legend>Voulez vous vraiment supprimer cet catégorie !!!</legend>
+            <table>
+                <tr>
+                    <td class="display-label" id="td_label">@Html.DisplayNameFor(model => model.Num_bo)</td>
+                    <td class="display-field" id="td_out">@Html.DisplayFor(model => model.Num_bo)</td>
+                </tr>
+
+                <tr>
+                    <td class="display-label" id="td_label">@Html.DisplayNameFor(model => model.Categorie.Nom_catg)</td>
+                    <td class="display-field" id="td_out">@Html.DisplayFor(model => model.Categorie.Nom_catg)</td>
+                </tr>
+                <tr>
+                    <td class="display-label" id="td_label">@Html.DisplayNameFor(model => model.Corps.Nom_corp)</td>
+                    <td class="display-field" id="td_out">@Html.DisplayFor(model => model.Corps.Nom_corp)</td>
+                </tr>
+                <tr>
+                    <td class="display-label" id="td_label">@Html.DisplayNameFor(model => model.Grade.Nom_grad)</td>
+                    <td class="display-field" id="td_out">@Html.DisplayFor(model => model.Grade.Nom_grad)</td>
+                </tr>
+
+            </table>
+
+
+        </fieldset>
+
+        <div class="modal-footer">
+
+
+
+            <p>
+                <input type="submit" class="btn btn-primary" value="Delete" />
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+
+
+            </p>
+
+
+
+        </div>
+
+
+    }
+</div>
+
+
+

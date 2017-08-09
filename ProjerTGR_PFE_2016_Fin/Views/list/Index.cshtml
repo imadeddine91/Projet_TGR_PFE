@@ -1,0 +1,128 @@
+﻿@model IEnumerable<ProjerTGR_PFE_2016_Fin.Models.Union_ref_bo>
+
+<div id="modal-container" class="modal fade" tabindex="1" role="dialog" style="border:1px solid #0094ff">
+    <a href="#close" title="Close" class="modal-close-btn"></a>
+    <div class="modal-content" style="width:500px !important;margin:10px auto !important">
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+
+        <ol class="breadcrumb">
+            <li class="active">
+                <i class="fa fa-dashboard"></i> Acceuil/Liste BO-Note Paramétrage
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="formadd">
+    <h2> Liste BO / Note Paramétrage </h2>
+</div>
+@using (Html.BeginForm("Index", "list", FormMethod.Get))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <div class="form">
+        <label>Filtre par <strong> Catégorie</strong>  : </label>
+        @Html.DropDownList("id_catg", null, "", new { @class = "form-contrl" })
+        @Html.ValidationMessage("id_catg")
+        <label style="margin-left:15px">Filtre par <strong> Corps </strong>  : </label>
+        @Html.DropDownList("id_corp", null, "", new { @class = "form-contrl" })
+        @Html.ValidationMessage("id_corp")
+        <label style="margin-left:20px;">Filtre par <strong> Grade</strong>  : </label>
+        @Html.DropDownList("id_grad", null, "", new { @class = "form-contrl" })
+        @Html.ValidationMessage("id_grad")
+        <button type="submit" class="btn btn-primary btn-liste" style="margin-top:0.5px; margin-left:20px;margin-bottom:10px;"> <i class="fa fa-search"></i> Recherche </button>
+    </div>
+    
+
+}
+<table class="table table-striped table-bordered table-list table-hover table-responsive" style="text-align:center;font-size:15px;">
+    <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Num_bo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Bulletins_officiel.patch_bo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Note_Parametrage.patch_par)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Categorie.Nom_catg)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Corps.Nom_corp)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Grade.Nom_grad)
+        </th>
+        <th>Opération</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td class="col-lg-3">
+                @Html.DisplayFor(modelItem => item.Num_bo)
+            </td>
+            <td class="col-lg-3">
+                @{
+        if (item.Bulletins_officiel.type_bo == ".pdf" || item.Bulletins_officiel.type_bo == ".PDF")
+        {
+            <img src="~/Images/file_pdfs.png" />
+        }
+        else
+        {
+            <img src="~/Images/file-word.png" />
+        }
+
+                }
+               @Html.ActionLink("Open", "Open", new { id = item.Bulletins_officiel.id_bo })
+
+
+            </td>
+
+            <td class="col-lg-3">
+                @{
+        if (item.Note_Parametrage.type_par == ".pdf" || item.Note_Parametrage.type_par == ".PDF")
+        {
+            <img src="~/Images/file_pdfs.png" />
+        }
+        else
+        {
+            <img src="~/Images/file-word.png" />
+        }
+
+                }
+                @Html.ActionLink("Open", "show", new { id = item.Note_Parametrage.id_par })
+
+            </td>
+
+            <td class="col-lg-3">
+                @Html.DisplayFor(modelItem => item.Categorie.Nom_catg)
+            </td>
+            <td class="col-lg-3">
+                @Html.DisplayFor(modelItem => item.Corps.Nom_corp)
+            </td>
+            <td class="col-lg-3">
+                @Html.DisplayFor(modelItem => item.Grade.Nom_grad)
+            </td>
+            <td class="col-lg-3">
+             
+                <i class="fa fa-align-justify" aria-hidden="true" style="margin-right:5px;"></i>@Html.ActionLink("Details", "Details", "list", new { id = item.id_un }, new { @class = "img-btn-addnote modal-link" })|
+                <i class="fa fa-trash-o" aria-hidden="true" style="margin-right:5px;"></i>@Html.ActionLink("Delete", "Delete", "list", new { id = item.id_un }, new { @class = "img-btn-addnote modal-link" })
+
+            </td>
+        </tr>
+    }
+
+</table>
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+<script src="~/Scripts/modal/Categorie.js"></script>
+}

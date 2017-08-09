@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Base_Final_TGR2016ModelStoreContainer" CdmEntityContainer="Base_Final_TGR2016Entities">
+    <EntitySetMapping Name="Bulletins_officiel">
+      <EntityTypeMapping TypeName="Base_Final_TGR2016Model.Bulletins_officiel">
+        <MappingFragment StoreEntitySet="Bulletins_officiel">
+          <ScalarProperty Name="id_bo" ColumnName="id_bo" />
+          <ScalarProperty Name="name_bo" ColumnName="name_bo" />
+          <ScalarProperty Name="type_bo" ColumnName="type_bo" />
+          <ScalarProperty Name="patch_bo" ColumnName="patch_bo" />
+          <ScalarProperty Name="taille_bo" ColumnName="taille_bo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Categorie">
+      <EntityTypeMapping TypeName="Base_Final_TGR2016Model.Categorie">
+        <MappingFragment StoreEntitySet="Categorie">
+          <ScalarProperty Name="id_catg" ColumnName="id_catg" />
+          <ScalarProperty Name="Num_catg" ColumnName="Num_catg" />
+          <ScalarProperty Name="Nom_catg" ColumnName="Nom_catg" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Corps">
+      <EntityTypeMapping TypeName="Base_Final_TGR2016Model.Corps">
+        <MappingFragment StoreEntitySet="Corps">
+          <ScalarProperty Name="id_corp" ColumnName="id_corp" />
+          <ScalarProperty Name="Num_corp" ColumnName="Num_corp" />
+          <ScalarProperty Name="Nom_corp" ColumnName="Nom_corp" />
+          <ScalarProperty Name="id_catg" ColumnName="id_catg" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Grade">
+      <EntityTypeMapping TypeName="Base_Final_TGR2016Model.Grade">
+        <MappingFragment StoreEntitySet="Grade">
+          <ScalarProperty Name="id_grad" ColumnName="id_grad" />
+          <ScalarProperty Name="Num_gard" ColumnName="Num_gard" />
+          <ScalarProperty Name="Nom_grad" ColumnName="Nom_grad" />
+          <ScalarProperty Name="id_corp" ColumnName="id_corp" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Note_Parametrage">
+      <EntityTypeMapping TypeName="Base_Final_TGR2016Model.Note_Parametrage">
+        <MappingFragment StoreEntitySet="Note_Parametrage">
+          <ScalarProperty Name="id_par" ColumnName="id_par" />
+          <ScalarProperty Name="name_par" ColumnName="name_par" />
+          <ScalarProperty Name="type_par" ColumnName="type_par" />
+          <ScalarProperty Name="patch_par" ColumnName="patch_par" />
+          <ScalarProperty Name="taille_par" ColumnName="taille_par" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Union_ref_bo">
+      <EntityTypeMapping TypeName="Base_Final_TGR2016Model.Union_ref_bo">
+        <MappingFragment StoreEntitySet="Union_ref_bo">
+          <ScalarProperty Name="id_un" ColumnName="id_un" />
+          <ScalarProperty Name="Date_saisi" ColumnName="Date_saisi" />
+          <ScalarProperty Name="Date_effet" ColumnName="Date_effet" />
+          <ScalarProperty Name="Num_bo" ColumnName="Num_bo" />
+          <ScalarProperty Name="id_bo" ColumnName="id_bo" />
+          <ScalarProperty Name="id_par" ColumnName="id_par" />
+          <ScalarProperty Name="id_catg" ColumnName="id_catg" />
+          <ScalarProperty Name="id_corp" ColumnName="id_corp" />
+          <ScalarProperty Name="id_grad" ColumnName="id_grad" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="Base_Final_TGR2016Model.Users">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="Statu" ColumnName="Statu" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

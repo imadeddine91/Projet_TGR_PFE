@@ -1,0 +1,157 @@
+﻿<link href="~/Content/sb-admin.css" rel="stylesheet" />
+
+@using (Html.BeginForm("Create", "Parametrage", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{ 
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <div class="formadd">
+        <h2> Formulaire d'ajouter</h2>
+    </div>
+    
+  
+    
+    <table class="table  table-responsive table-bor">
+        <tr >
+
+            <td class="td">Bulletins_officiel<strong> max(30Mo)</strong> </td>
+            <td class="td">
+                <input type="file" name="Bulletins" value="upload" required />
+                
+
+            </td>
+
+
+            
+
+            <td class="td">Note_Parametrage<strong> max(30Mo)</strong>  </td>
+            <td class="td"><input type="file" name="Note" value="upload" required /></td>
+            
+
+        </tr>
+        
+
+
+
+
+ 
+        <tr class="table_tr">
+            <td class="td">Numéro BO</td>
+            <td class="td"><input class="form-control" type="number" name="numBO" value="numero" style="width:190px;" required /></td>
+            <td class="td">Catégorie</td>
+            <td class="td"> @Html.DropDownList("id_catg", null, "", new { @class = "form-contrl" })</td>
+
+        </tr>
+
+        
+        <tr class="table_tr">
+
+            <td class="td1">Corps</td>
+            <td class="td1">@Html.DropDownList("id_corp", null, "", new { @class = "form-contrl" })</td>
+            <td class="td1">Grade</td>
+            <td class="td1">@Html.DropDownList("id_grad", null, "", new { @class = "form-contrl" })</td>
+
+        </tr>
+       
+
+    </table>
+    <div class="ligne"> </div>
+    <div class="butnadd">
+
+        <button type="submit" class="btn btn-primary" style="font-size:17px;"> <i class="fa fa-upload" aria-hidden="true"></i> Enregistrer </button>
+    </div>
+   
+
+    <div class="butncancel">
+        <button type="reset" class="btn btn-danger" style="font-size:17px;"> <i class="fa fa-ban" aria-hidden="true"></i> Annuler </button>
+    </div>
+
+
+} 
+
+@{
+    if (ViewData["result"] == "bien")
+    {
+        <div class="alert alert-success alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Success </strong> Formulaire bien Ajouter.
+        </div>
+    }
+    else if (ViewData["result"] == "error")
+    {
+        <div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Warrnig </strong> le fichier <strong>Bulletins_officiel</strong>  ou <strong>Note_Parametrage</strong>  déja exist !!!!! .
+        </div>
+
+    }
+    else if (ViewData["result"] == "probleme")
+    {
+        <div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Warrnig </strong> Changer le nom de  <strong>Bulletins_officiel</strong>  ou <strong>Note_Parametrage</strong>  pour ajouter !!!!! .
+        </div>
+
+    }
+
+} 
+
+ 
+
+    
+
+
+
+
+@section Scripts {
+   <script src="~/Scripts/bootstrap-filestyle.js"></script>
+   <script src="~/Scripts/jquery.form.jss"></script>
+    <script>
+
+        $(":file").filestyle({ buttonName: "btn-primary" });
+    </script>
+    <script>
+        (function () {
+            var bar = $('.progress-bar');
+            var percent = $('.progress-bar');
+            var status = $('#status');
+
+            $('form').ajaxForm({
+                beforSend: function () {
+                    status.empty();
+                    var percentValue = '0%';
+                    bar.width(percentValue);
+                    percent.html(percentValue);
+
+                },
+                uploadProgress: function (event, position, total, percentComplete) {
+                    var percentValue = percentComplete + '%';
+                    bar.width(percentValue);
+                    percent.html(percentValue);
+
+                },
+                success: function (d) {
+
+                    var percentValue = '100%';
+                    bar.width(percentValue);
+                    percent.html(percentValue);
+                    $('.ful').val('');
+                    alert(d);
+
+                },
+                complete: function (xhr) {
+
+                    status.html(xhr.responseText);
+
+
+                }
+
+
+
+            })();
+
+        })();
+    </script>
+
+    @Scripts.Render("~/bundles/jqueryval")
+
+}

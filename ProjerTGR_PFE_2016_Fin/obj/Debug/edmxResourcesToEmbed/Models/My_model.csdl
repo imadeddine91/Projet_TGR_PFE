@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Base_Final_TGR2016Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Bulletins_officiel">
+    <Key>
+      <PropertyRef Name="id_bo" />
+    </Key>
+    <Property Name="id_bo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name_bo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="type_bo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="patch_bo" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+    <Property Name="taille_bo" Type="Int32" />
+    <NavigationProperty Name="Union_ref_bo" Relationship="Self.FK_Union_ref_bo_id_bo" FromRole="Bulletins_officiel" ToRole="Union_ref_bo" />
+  </EntityType>
+  <EntityType Name="Categorie">
+    <Key>
+      <PropertyRef Name="id_catg" />
+    </Key>
+    <Property Name="id_catg" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Num_catg" Type="Int32" Nullable="false" />
+    <Property Name="Nom_catg" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Corps" Relationship="Self.FK_Corps_id_catg" FromRole="Categorie" ToRole="Corps" />
+    <NavigationProperty Name="Union_ref_bo" Relationship="Self.FK_Union_ref_bo_id_catg" FromRole="Categorie" ToRole="Union_ref_bo" />
+  </EntityType>
+  <EntityType Name="Corps">
+    <Key>
+      <PropertyRef Name="id_corp" />
+    </Key>
+    <Property Name="id_corp" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Num_corp" Type="Int32" Nullable="false" />
+    <Property Name="Nom_corp" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="id_catg" Type="Int32" />
+    <NavigationProperty Name="Categorie" Relationship="Self.FK_Corps_id_catg" FromRole="Corps" ToRole="Categorie" />
+    <NavigationProperty Name="Grade" Relationship="Self.FK_Grade_id_corp" FromRole="Corps" ToRole="Grade" />
+    <NavigationProperty Name="Union_ref_bo" Relationship="Self.FK_Union_ref_bo_id_corp" FromRole="Corps" ToRole="Union_ref_bo" />
+  </EntityType>
+  <EntityType Name="Grade">
+    <Key>
+      <PropertyRef Name="id_grad" />
+    </Key>
+    <Property Name="id_grad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Num_gard" Type="Int32" />
+    <Property Name="Nom_grad" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="id_corp" Type="Int32" />
+    <NavigationProperty Name="Corps" Relationship="Self.FK_Grade_id_corp" FromRole="Grade" ToRole="Corps" />
+    <NavigationProperty Name="Union_ref_bo" Relationship="Self.FK_Union_ref_bo_id_grad" FromRole="Grade" ToRole="Union_ref_bo" />
+  </EntityType>
+  <EntityType Name="Note_Parametrage">
+    <Key>
+      <PropertyRef Name="id_par" />
+    </Key>
+    <Property Name="id_par" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name_par" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="type_par" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="patch_par" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+    <Property Name="taille_par" Type="Int32" />
+    <NavigationProperty Name="Union_ref_bo" Relationship="Self.FK_Union_ref_bo_id_par" FromRole="Note_Parametrage" ToRole="Union_ref_bo" />
+  </EntityType>
+  <EntityType Name="Union_ref_bo">
+    <Key>
+      <PropertyRef Name="id_un" />
+    </Key>
+    <Property Name="id_un" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Date_saisi" Type="DateTime" Precision="3" />
+    <Property Name="Date_effet" Type="DateTime" Precision="3" />
+    <Property Name="Num_bo" Type="Int32" />
+    <Property Name="id_bo" Type="Int32" />
+    <Property Name="id_par" Type="Int32" />
+    <Property Name="id_catg" Type="Int32" />
+    <Property Name="id_corp" Type="Int32" />
+    <Property Name="id_grad" Type="Int32" />
+    <NavigationProperty Name="Bulletins_officiel" Relationship="Self.FK_Union_ref_bo_id_bo" FromRole="Union_ref_bo" ToRole="Bulletins_officiel" />
+    <NavigationProperty Name="Categorie" Relationship="Self.FK_Union_ref_bo_id_catg" FromRole="Union_ref_bo" ToRole="Categorie" />
+    <NavigationProperty Name="Corps" Relationship="Self.FK_Union_ref_bo_id_corp" FromRole="Union_ref_bo" ToRole="Corps" />
+    <NavigationProperty Name="Grade" Relationship="Self.FK_Union_ref_bo_id_grad" FromRole="Union_ref_bo" ToRole="Grade" />
+    <NavigationProperty Name="Note_Parametrage" Relationship="Self.FK_Union_ref_bo_id_par" FromRole="Union_ref_bo" ToRole="Note_Parametrage" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Statu" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK_Union_ref_bo_id_bo">
+    <End Role="Bulletins_officiel" Type="Self.Bulletins_officiel" Multiplicity="0..1" />
+    <End Role="Union_ref_bo" Type="Self.Union_ref_bo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bulletins_officiel">
+        <PropertyRef Name="id_bo" />
+      </Principal>
+      <Dependent Role="Union_ref_bo">
+        <PropertyRef Name="id_bo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Corps_id_catg">
+    <End Role="Categorie" Type="Self.Categorie" Multiplicity="0..1" />
+    <End Role="Corps" Type="Self.Corps" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categorie">
+        <PropertyRef Name="id_catg" />
+      </Principal>
+      <Dependent Role="Corps">
+        <PropertyRef Name="id_catg" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Union_ref_bo_id_catg">
+    <End Role="Categorie" Type="Self.Categorie" Multiplicity="0..1" />
+    <End Role="Union_ref_bo" Type="Self.Union_ref_bo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categorie">
+        <PropertyRef Name="id_catg" />
+      </Principal>
+      <Dependent Role="Union_ref_bo">
+        <PropertyRef Name="id_catg" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Grade_id_corp">
+    <End Role="Corps" Type="Self.Corps" Multiplicity="0..1" />
+    <End Role="Grade" Type="Self.Grade" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Corps">
+        <PropertyRef Name="id_corp" />
+      </Principal>
+      <Dependent Role="Grade">
+        <PropertyRef Name="id_corp" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Union_ref_bo_id_corp">
+    <End Role="Corps" Type="Self.Corps" Multiplicity="0..1" />
+    <End Role="Union_ref_bo" Type="Self.Union_ref_bo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Corps">
+        <PropertyRef Name="id_corp" />
+      </Principal>
+      <Dependent Role="Union_ref_bo">
+        <PropertyRef Name="id_corp" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Union_ref_bo_id_grad">
+    <End Role="Grade" Type="Self.Grade" Multiplicity="0..1" />
+    <End Role="Union_ref_bo" Type="Self.Union_ref_bo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Grade">
+        <PropertyRef Name="id_grad" />
+      </Principal>
+      <Dependent Role="Union_ref_bo">
+        <PropertyRef Name="id_grad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Union_ref_bo_id_par">
+    <End Role="Note_Parametrage" Type="Self.Note_Parametrage" Multiplicity="0..1" />
+    <End Role="Union_ref_bo" Type="Self.Union_ref_bo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Note_Parametrage">
+        <PropertyRef Name="id_par" />
+      </Principal>
+      <Dependent Role="Union_ref_bo">
+        <PropertyRef Name="id_par" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Base_Final_TGR2016Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Bulletins_officiel" EntityType="Self.Bulletins_officiel" />
+    <EntitySet Name="Categorie" EntityType="Self.Categorie" />
+    <EntitySet Name="Corps" EntityType="Self.Corps" />
+    <EntitySet Name="Grade" EntityType="Self.Grade" />
+    <EntitySet Name="Note_Parametrage" EntityType="Self.Note_Parametrage" />
+    <EntitySet Name="Union_ref_bo" EntityType="Self.Union_ref_bo" />
+    <EntitySet Name="Users" EntityType="Self.Users" />
+    <AssociationSet Name="FK_Union_ref_bo_id_bo" Association="Self.FK_Union_ref_bo_id_bo">
+      <End Role="Bulletins_officiel" EntitySet="Bulletins_officiel" />
+      <End Role="Union_ref_bo" EntitySet="Union_ref_bo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Corps_id_catg" Association="Self.FK_Corps_id_catg">
+      <End Role="Categorie" EntitySet="Categorie" />
+      <End Role="Corps" EntitySet="Corps" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Union_ref_bo_id_catg" Association="Self.FK_Union_ref_bo_id_catg">
+      <End Role="Categorie" EntitySet="Categorie" />
+      <End Role="Union_ref_bo" EntitySet="Union_ref_bo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Grade_id_corp" Association="Self.FK_Grade_id_corp">
+      <End Role="Corps" EntitySet="Corps" />
+      <End Role="Grade" EntitySet="Grade" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Union_ref_bo_id_corp" Association="Self.FK_Union_ref_bo_id_corp">
+      <End Role="Corps" EntitySet="Corps" />
+      <End Role="Union_ref_bo" EntitySet="Union_ref_bo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Union_ref_bo_id_grad" Association="Self.FK_Union_ref_bo_id_grad">
+      <End Role="Grade" EntitySet="Grade" />
+      <End Role="Union_ref_bo" EntitySet="Union_ref_bo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Union_ref_bo_id_par" Association="Self.FK_Union_ref_bo_id_par">
+      <End Role="Note_Parametrage" EntitySet="Note_Parametrage" />
+      <End Role="Union_ref_bo" EntitySet="Union_ref_bo" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

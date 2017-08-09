@@ -1,0 +1,148 @@
+﻿@model PagedList.IPagedList<ProjerTGR_PFE_2016_Fin.Models.Corps>
+@using PagedList.Mvc;
+
+
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+<div id="modal-container" class="modal fade" tabindex="1" role="dialog" style="border:1px solid #0094ff">
+    <a href="#close" title="Close" class="modal-close-btn"></a>
+    <div class="modal-content" style="width:500px !important;margin:10px auto !important">
+
+    </div>
+</div>
+<div class="row" style="margin-top:10px;">
+    <div class="col-lg-12">
+
+        <ol class="breadcrumb">
+            <li class="active">
+                <i class="fa fa-dashboard"></i> Acceuil/Corps
+            </li>
+        </ol>
+    </div>
+</div>
+@{
+
+    if (ViewData["messag"] == "add")
+    {
+        <div class="alert alert-success alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Réussi!</strong> les champs que vous avez saisi bien ajouter .
+        </div>
+
+
+    }
+    else if (ViewData["messag"] == "edit")
+    {
+        <div class="alert alert-success alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Réussi!</strong> les champs que vous avez saisi bien modifier .
+        </div>
+
+    }
+    else if (ViewData["messag"] == "delete")
+    {
+        <div class="alert alert-success alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Réussi!</strong> les champs bien supprimer .
+        </div>
+    }
+    else if (ViewData["messag"] == "error")
+    {
+
+        <div class="alert alert-warning alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Attention!</strong> Vérifer les champs que vous avez saisi !!!.
+        </div>
+    }
+    else if (ViewData["messag"] == "existe")
+    {
+        <div class="alert alert-warning alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Attention!</strong> le numéro Catégorie ou Catégorie déja existe !!!.
+        </div>
+    }
+}
+<fieldset style="border:outset 3px #7ac0da;;margin-bottom:20px; margin-top:10px;padding:10px;padding-top:25px;">
+
+    <div class="row" style="margin-bottom:20px;">
+        <div class="col-xs-12">
+
+
+            <button type="button" style="margin: 1px; width: 17.8% ;background-color:#82b1ff ;" class=" btn btn-default col-md-4"><span style="font-size:larger;"><span style="margin-right: 5px" class="glyphicon glyphicon-plus"></span> @Html.ActionLink("Add New Corps", "Create", "Corps", new { @class = "img-btn-addnote modal-link" })</button>
+
+         @using (Html.BeginForm("serach", "Corps", FormMethod.Get))
+         {
+      <input type="number" class="form-control col-md-3" placeholder="Numéro..." style="width:20%;padding:18px;margin-top:2px;margin-left:300px;margin-right:10px;" name="strSearch" />
+    <label class="col-md-3" style="width:8%; margin-top:10.5px;">  Catégorie </label>
+    @Html.DropDownList("id_catg", null, "", new { @class = "form-contrl col-md-3" })
+            <button type="submit" class="btn btn-primary col-md-3" style="margin-top:5px; display:inline; width:9% ;margin-left:14px;" > <i class="fa fa-search"></i> Recherche </button>
+         }
+            
+            
+        
+            
+           
+
+        
+           
+
+
+        </div>
+    </div>
+</fieldset>
+<fieldset style="margin-bottom:20px;padding:10px;">
+    <table class="table table-striped table-bordered table-list ">
+        <tr>
+
+            <th>
+               Numéro Corp
+            </th>
+            <th>
+                Nom Corp
+            </th>
+            <th>
+               Catégorie
+            </th>
+            <th>Opération</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td class="col-lg-2">
+                   @item.Num_corp
+                </td>
+                <td class="col-lg-2">
+                  @item.Nom_corp
+                </td>
+                <td class="col-lg-2">
+                   @item.Categorie.Nom_catg
+                </td>
+                <td class="col-lg-2">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true" style="margin-right:5px;"></i>@Html.ActionLink("Edit", "Edit", "Corps", new { id = item.id_corp },new { @class = "img-btn-addnote modal-link" })|
+                    <i class="fa fa-align-justify" aria-hidden="true" style="margin-right:5px;"></i>@Html.ActionLink("Details", "Details", "Corps", new { id = item.id_corp },new { @class = "img-btn-addnote modal-link" })|
+                    <i class="fa fa-trash-o" aria-hidden="true" style="margin-right:5px;"></i>@Html.ActionLink("Delete", "Delete", "Corps", new { id = item.id_corp },new { @class = "img-btn-addnote modal-link" })
+
+
+                </td>
+            </tr>
+        }
+
+    </table>
+    @Html.PagedListPager(Model, page => Url.Action("index", new { page, pagesize = Model.PageSize }))
+    <strong> page  </strong> @Model.FirstItemOnPage :  <strong> de </strong> @Model.LastItemOnPage <strong> à  </strong>  @Model.TotalItemCount 
+    </fieldset>
+
+
+
+
+
+    @section Scripts{
+        <script src="~/Scripts/modal/Categorie.js"></script>
+    }

@@ -1,0 +1,57 @@
+﻿@model ProjerTGR_PFE_2016_Fin.Models.Categorie
+
+
+
+    
+        
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><i class="fa fa-plus-square-o" aria-hidden="true"></i> Ajouter </h4>
+            </div>
+            <div class="modal-body">
+               @using (Html.BeginForm("Create", "Categorie", FormMethod.Post))
+               {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+
+                <fieldset>
+               
+                    <table>
+                        <tr>
+                            <td id="td_label" class="display-label"> @Html.LabelFor(model => model.Num_catg)</td>
+
+                            <td id="td_out" class="editor-label">
+
+                                @Html.EditorFor(model => model.Num_catg)
+                                @Html.ValidationMessageFor(model => model.Num_catg)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="td_label" class="display-label">@Html.LabelFor(model => model.Nom_catg)</td>
+                            <td id="td_out" class="deditor-field">
+                                @Html.EditorFor(model => model.Nom_catg)
+                                @Html.ValidationMessageFor(model => model.Nom_catg)
+                            </td>
+                        </tr>
+                    </table>
+
+
+
+                   
+                </fieldset>
+    <div class="modal-footer">
+      
+        <input type="submit" class="btn btn-primary  " value=" Ajouter " />
+        <button type="button" class="btn btn-danger " data-dismiss="modal">Annuler</button>
+       
+    </div>
+
+               }
+            </div>
+            
+   
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

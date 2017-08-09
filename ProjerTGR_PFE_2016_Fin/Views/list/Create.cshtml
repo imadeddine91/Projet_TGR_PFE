@@ -1,0 +1,84 @@
+﻿@model ProjerTGR_PFE_2016_Fin.Models.Union_ref_bo
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Union_ref_bo</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.id_un)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.id_un)
+            @Html.ValidationMessageFor(model => model.id_un)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Num_bo)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Num_bo)
+            @Html.ValidationMessageFor(model => model.Num_bo)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.id_bo, "Bulletins_officiel")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("id_bo", String.Empty)
+            @Html.ValidationMessageFor(model => model.id_bo)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.id_par, "Note_Parametrage")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("id_par", String.Empty)
+            @Html.ValidationMessageFor(model => model.id_par)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.id_catg, "Categorie")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("id_catg", String.Empty)
+            @Html.ValidationMessageFor(model => model.id_catg)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.id_corp, "Corps")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("id_corp", String.Empty)
+            @Html.ValidationMessageFor(model => model.id_corp)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.id_grad, "Grade")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("id_grad", String.Empty)
+            @Html.ValidationMessageFor(model => model.id_grad)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
